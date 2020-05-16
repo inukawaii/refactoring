@@ -17,6 +17,7 @@ module.exports = function createStatementData(invoice, plays) {
   }
   
   function enrichPerformance(aPerformance) {
+    const calculator = new Performancecalculator(aPerformance)
     const result = Object.assign({}, aPerformance);
     result.play = playFor(result);
     result.amount = amountFor(result);
@@ -55,5 +56,11 @@ module.exports = function createStatementData(invoice, plays) {
     result += Math.max(aPerformance.audience - 30, 0);
     if ("comedy" === aPerformance.play.type) result += Math.floor(aPerformance.audience / 5);
     return result;
+  }
+}
+
+class Performancecalculator {
+  constructor(aPerformance) {
+    this.performances = aPerformance;
   }
 }
